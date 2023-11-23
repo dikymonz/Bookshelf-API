@@ -1,14 +1,14 @@
 {
   "name": "bookshelf-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Submission BackEnd Dicoding",
   "main": "index.js",
   "scripts": {
     "start": "node ./src/server.js",
     "start-dev": "nodemon ./src/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Dikymonz",
   "license": "ISC",
   "dependencies": {
     "@hapi/hapi": "^20.1.2",
@@ -19,5 +19,13 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "nodemon": "^2.0.7"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dikymonz/Bookshelf-API.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dikymonz/Bookshelf-API/issues"
+  },
+  "homepage": "https://github.com/dikymonz/Bookshelf-API#readme"
 }

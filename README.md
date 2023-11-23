@@ -1,2 +1,1 @@
-# Bookshelf API
-API management for bookshelf applications.
+# Bookshelf API back end Dicoding
