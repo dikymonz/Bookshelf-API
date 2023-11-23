@@ -1,6 +1,7 @@
 const { nanoid } = require('nanoid');
 const books = require('../books');
 
+// Handler untuk menambahkan buku
 const addBookHandler = (request, h) => {
   const {
     name,
@@ -13,6 +14,7 @@ const addBookHandler = (request, h) => {
     reading,
   } = request.payload;
 
+  // Validasi apakah 'name' sudah diisi
   if (name === undefined) {
     const response = h.response({
       status: 'fail',
@@ -23,6 +25,7 @@ const addBookHandler = (request, h) => {
     return response;
   }
 
+  // Validasi pageCount dan readPage
   if (pageCount < readPage) {
     const response = h.response({
       status: 'fail',
@@ -33,10 +36,13 @@ const addBookHandler = (request, h) => {
     return response;
   }
 
+  // Pembuatan id buku dengan menggunakan nanoid
   const id = nanoid(16);
   const insertedAt = new Date().toISOString();
   const updatedAt = insertedAt;
   const finished = (pageCount === readPage);
+
+  // Membuat objek buku baru
   const newBook = {
     id,
     name,
@@ -52,10 +58,13 @@ const addBookHandler = (request, h) => {
     updatedAt,
   };
 
+  // Menambahkan buku baru ke dalam array books
   books.push(newBook);
 
+  // Memeriksa apakah buku berhasil ditambahkan
   const isSuccess = books.filter((book) => book.id === id).length > 0;
 
+  // Mengembalikan respons sesuai dengan keberhasilan penambahan buku
   if (isSuccess) {
     const response = h.response({
       status: 'success',
@@ -69,6 +78,7 @@ const addBookHandler = (request, h) => {
     return response;
   }
 
+  // Respons jika buku gagal ditambahkan
   const response = h.response({
     status: 'fail',
     message: 'Buku gagal ditambahkan',

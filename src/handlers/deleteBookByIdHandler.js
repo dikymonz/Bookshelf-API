@@ -1,10 +1,13 @@
 const books = require('../books');
 
+// Handler untuk menghapus buku berdasarkan ID
 const deleteBookByIdHandler = (request, h) => {
   const { id } = request.params;
 
-  const index = books.findIndex((note) => note.id === id);
+  // Mencari index buku dengan ID yang sesuai dalam array 'books'
+  const index = books.findIndex((book) => book.id === id);
 
+  // Jika buku dengan ID yang sesuai ditemukan, hapus buku dari array 'books'
   if (index !== -1) {
     books.splice(index, 1);
     const response = h.response({
@@ -16,6 +19,7 @@ const deleteBookByIdHandler = (request, h) => {
     return response;
   }
 
+  // Jika buku dengan ID yang sesuai tidak ditemukan, kirim respons buku tidak ditemukan
   const response = h.response({
     status: 'fail',
     message: 'Buku gagal dihapus. Id tidak ditemukan',

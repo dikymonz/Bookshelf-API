@@ -1,7 +1,8 @@
 const books = require('../books');
 
+// Handler untuk mengedit informasi buku berdasarkan ID
 const editBookByIdHandler = (request, h) => {
-  const { id } = request.params;
+  const { id } = request.params; // Mendapatkan ID dari request parameters
   const {
     name,
     year,
@@ -16,6 +17,7 @@ const editBookByIdHandler = (request, h) => {
   const index = books.findIndex((book) => book.id === id);
 
   if (index !== -1) {
+    // Validasi apakah nama buku diisi
     if (name === undefined) {
       const response = h.response({
         status: 'fail',
@@ -26,6 +28,7 @@ const editBookByIdHandler = (request, h) => {
       return response;
     }
 
+    // Validasi pageCount dan readPage
     if (pageCount < readPage) {
       const response = h.response({
         status: 'fail',
@@ -36,8 +39,10 @@ const editBookByIdHandler = (request, h) => {
       return response;
     }
 
+    // Menghitung status finished berdasarkan readPage dan pageCount
     const finished = (pageCount === readPage);
 
+    // Memperbarui informasi buku di dalam array 'books'
     books[index] = {
       ...books[index],
       name,
@@ -52,6 +57,7 @@ const editBookByIdHandler = (request, h) => {
       updatedAt,
     };
 
+    // Respon sukses setelah berhasil memperbarui buku
     const response = h.response({
       status: 'success',
       message: 'Buku berhasil diperbarui',
@@ -61,6 +67,7 @@ const editBookByIdHandler = (request, h) => {
     return response;
   }
 
+  // Respon jika buku dengan ID yang sesuai tidak ditemukan
   const response = h.response({
     status: 'fail',
     message: 'Gagal memperbarui buku. Id tidak ditemukan',
